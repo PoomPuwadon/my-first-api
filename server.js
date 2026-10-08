@@ -18,16 +18,17 @@ app.get("/events", (req,res) => {
 app.get("/events/:id", (req,res) => {
     const id = Number(req.params.id);
 
+    
+    if (!Number.isInteger(id)){
+        return res.status(400).json({ error: "Bad request, wrong event id type bro, has to be an integer"})
+    }
     const event = events.find((obj) => obj.id === id);
-    if (event){ 
-        res.json(event);
+    
+    if (!event) {
+        return res.status(404).json({ error: "event not found bro"})
     }
-    else if (!Number.isInteger(id)){
-        res.status(400).json({ error: "Bad request, wrong event id type bro, has to be an integer"})
-    }
-    else {
-        res.status(404).json({ error: "event not found bro"})
-    }
+
+    res.json(event);
 });
 
 const port = 3000;
