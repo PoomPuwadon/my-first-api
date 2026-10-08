@@ -12,7 +12,7 @@ app.get("/hello", (req,res) => {
 });
 
 app.get("/events", (req,res) => {
-    res.send(events); // for .send Express checks if it's a string or array/object, for strings it sends HTML, for array/object it sends json
+    res.json(events); // for .send Express checks if it's a string or array/object, for strings it sends HTML, for array/object it sends json
 });
 
 const port = 3000;
